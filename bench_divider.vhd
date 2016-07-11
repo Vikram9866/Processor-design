@@ -65,10 +65,10 @@ begin
 BENCH_DIVIDER_TBSTIM: process is
     variable L: line;
 begin
-    reset <= '1';
+    reset <= '0';
     wait for 40 * 1 ns;
     wait until rising_edge(clock);
-    reset <= '0';
+    reset <= '1';
     operand <= to_unsigned(47, 10);
     wait until rising_edge(clock);
     wait until rising_edge(clock);

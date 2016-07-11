@@ -26,7 +26,7 @@ signal controlunit_1_opa: unsigned(3 downto 0);
 signal controlunit_1_sel: unsigned(1 downto 0);
 
 procedure MYHDL4_mul(
-    c: out unsigned;
+    signal c: out unsigned;
     a: in unsigned;
     b: in unsigned) is
 begin
@@ -34,7 +34,7 @@ begin
 end procedure MYHDL4_mul;
 
 procedure MYHDL5_add(
-    c: out unsigned;
+    signal c: out unsigned;
     a: in unsigned;
     b: in unsigned) is
 begin
@@ -42,7 +42,7 @@ begin
 end procedure MYHDL5_add;
 
 procedure MYHDL6_sub(
-    c: out unsigned;
+    signal c: out unsigned;
     a: in unsigned;
     b: in unsigned) is
 begin
@@ -50,11 +50,11 @@ begin
 end procedure MYHDL6_sub;
 
 procedure MYHDL7_shift_l(
-    c: out unsigned;
+    signal c: out unsigned;
     a: in unsigned;
     b: in unsigned) is
 begin
-    c <= shift_left(a, b);
+    c <= shift_left(a, to_integer(b));
 end procedure MYHDL7_shift_l;
 
 begin
@@ -72,23 +72,20 @@ begin
     operand <= to_unsigned(47, 10);
     wait until rising_edge(clock);
     wait until rising_edge(clock);
-    write(L, to_string(to_integer(result)));
-    writeline(output, L);
+  
     operand <= to_unsigned(289, 10);
     wait until rising_edge(clock);
     wait until rising_edge(clock);
-    write(L, to_string(to_integer(result)));
-    writeline(output, L);
+
+
     operand <= to_unsigned(545, 10);
     wait until rising_edge(clock);
     wait until rising_edge(clock);
-    write(L, to_string(to_integer(result)));
-    writeline(output, L);
+
     operand <= to_unsigned(801, 10);
     wait until rising_edge(clock);
     wait until rising_edge(clock);
-    write(L, to_string(to_integer(result)));
-    writeline(output, L);
+
     assert False report "End of Simulation" severity Failure;
     wait;
 end process BENCH_DIVIDER_TBSTIM;
